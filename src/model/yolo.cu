@@ -446,6 +446,7 @@ public:
     virtual BoxArray forwards(void *stream = nullptr) override 
     {
         int num_image = slice_->slice_num_h_ * slice_->slice_num_v_;
+        printf("===================================图片数量是：%d========================================\n",num_image);
         if (num_image == 0) return {};
         
         auto input_dims = trt_->static_dims(0);
