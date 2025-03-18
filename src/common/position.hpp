@@ -7,6 +7,7 @@
 #include <functional>
 #include <utility> // for std::forward
 
+// 返回两个矩形框交集的面积
 template <typename T>
 float computeIntersectionArea(const std::tuple<T, T, T, T>& box1, const std::tuple<T, T, T, T>& box2) {
     T l1, t1, r1, b1;
@@ -19,6 +20,7 @@ float computeIntersectionArea(const std::tuple<T, T, T, T>& box1, const std::tup
     return intersectionWidth * intersectionHeight;
 }
 
+// IOU ：交集面积占总面积的比例
 template <typename T>
 float computeIoU(const std::tuple<T, T, T, T>& box1, const std::tuple<T, T, T, T>& box2) {
     T l1, t1, r1, b1;
@@ -36,6 +38,7 @@ float computeIoU(const std::tuple<T, T, T, T>& box1, const std::tuple<T, T, T, T
     return static_cast<float>(intersectionArea) / (areaA + areaB - intersectionArea);
 }
 
+// 它们的交集面积与较小矩形面积的比值
 template <typename T>
 float computeOverlap(const std::tuple<T, T, T, T>& box1, const std::tuple<T, T, T, T>& box2) {
     T areaA = (std::get<2>(box1) - std::get<0>(box1)) * (std::get<3>(box1) - std::get<1>(box1));

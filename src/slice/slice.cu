@@ -12,26 +12,26 @@ static __global__ void slice_kernel(
   const int slice_num_h,
   const int slice_num_v,
   const int* __restrict__ slice_start_point)
-{
+{   // 表示第几个切片 一个block处理一个切图
     const int slice_idx = blockIdx.z;
-
+    // slice_start_point存储了当前切片的起点在原图上的坐标
     const int start_x = slice_start_point[slice_idx * 2];
     const int start_y = slice_start_point[slice_idx * 2 + 1];
 
-    // 当前像素在切片内的相对位置
+    // 当前像素在当前切片内的相对位置
     const int x = blockIdx.x * blockDim.x + threadIdx.x;
     const int y = blockIdx.y * blockDim.y + threadIdx.y;
 
     if(x >= slice_width || y >= slice_height) 
         return;
-
+    // 当前切片像素在原图上的坐标
     const int dx = start_x + x;
     const int dy = start_y + y;
 
     if(dx >= width || dy >= height) 
         return;
 
-    // 读取像素
+    // 获取该像素在原图上的绝对位置
     const int src_index = dy * width + dx;
     const uchar3 pixel = image[src_index];
 
@@ -50,7 +50,8 @@ static void slice_plane(const uint8_t* image,
     const int slice_num_h,
     const int slice_num_v,
     void* stream=nullptr)
-{
+{   
+    // 切图的数量 比如一张图被切分成3*2（水平，垂直），那么一共有6张切图
     int slice_total = slice_num_h * slice_num_v;
     cudaStream_t stream_ = (cudaStream_t)stream;
     dim3 block(32, 32);
@@ -87,7 +88,7 @@ int calculateNumCuts(int dimension, int subDimension, float overlapRatio) {
     int numCuts = static_cast<int>(std::ceil(cuts));
     return numCuts + 1;
 }
-
+// 计算输入分辨率的对数因子（向下取整）
 static int calc_resolution_factor(int resolution)
 {
     int expo = 0;
@@ -106,7 +107,8 @@ static std::string calc_aspect_ratio_orientation(int width, int height)
 }
 
 static std::tuple<int, int, float, float> calc_ratio_and_slice(const std::string& orientation, int slide=1, float ratio=0.1)
-{
+{   
+    // slice_row表示沿行的方向； overlap_height_ratio 表示沿高度方向（垂直方向）的重叠比例  slide为基础切片数
     int slice_row, slice_col;
     float overlap_height_ratio, overlap_width_ratio;
     if (orientation == "vertical")
@@ -157,7 +159,7 @@ static std::tuple<int, int, float, float> calc_slice_and_overlap_params(
         split_col = 1;
         split_row = 1;
         overlap_width_ratio = 1;
-        overlap_height_ratio = 1;
+        overlap_height_ratio = 1; 
     }
     int slice_height = height / split_col;
     int slice_width = width / split_row;
@@ -214,22 +216,22 @@ void SliceImage::slice(
 
     slice_num_h_ = calculateNumCuts(width, slice_width, overlap_width_ratio);
     slice_num_v_ = calculateNumCuts(height, slice_height, overlap_height_ratio);
-    // printf("------------------------------------------------------\n"
-    //     "CUDA SAHI CROP IMAGE ✂️\n"
-    //     "------------------------------------------------------\n"
-    //     "%-30s: %-10d\n"
-    //     "%-30s: %-10d\n"
-    //     "%-30s: %-10.2f\n"
-    //     "%-30s: %-10.2f\n"
-    //     "%-30s: %-10d\n"
-    //     "%-30s: %-10d\n"
-    //     "------------------------------------------------------\n", 
-    //     "Slice width", slice_width_,
-    //     "Slice height", slice_height_,
-    //     "Overlap width ratio", overlap_width_ratio,
-    //     "Overlap height ratio", overlap_height_ratio,
-    //     "Number of horizontal cuts", slice_num_h_,
-    //     "Number of vertical cuts", slice_num_v_);
+    printf("------------------------------------------------------\n"
+        "CUDA SAHI CROP IMAGE ✂️\n"
+        "------------------------------------------------------\n"
+        "%-30s: %-10d\n"
+        "%-30s: %-10d\n"
+        "%-30s: %-10.2f\n"
+        "%-30s: %-10.2f\n"
+        "%-30s: %-10d\n"
+        "%-30s: %-10d\n"
+        "------------------------------------------------------\n", 
+        "Slice width", slice_width_,
+        "Slice height", slice_height_,
+        "Overlap width ratio", overlap_width_ratio,
+        "Overlap height ratio", overlap_height_ratio,
+        "Number of horizontal cuts", slice_num_h_,
+        "Number of vertical cuts", slice_num_v_);
     int slice_num            = slice_num_h_ * slice_num_v_;
     int overlap_width_pixel  = slice_width  * overlap_width_ratio;
     int overlap_height_pixel = slice_height * overlap_height_ratio;

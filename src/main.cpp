@@ -14,9 +14,9 @@ void SpeedTest();
 
 int main()
 {
-    yolo11poseSlicedInfer();
-    yolo11poseNoSlicedInfer();
-    // v11SlicedInfer();
+    // yolo11poseSlicedInfer();
+    // yolo11poseNoSlicedInfer();
+    v11SlicedInfer();
     // v5SlicedInfer();
     // SpeedTest();
     return 0;

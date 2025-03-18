@@ -1,0 +1,127 @@
+stringstream 是 C++ 标准库 <sstream> 头文件中的一个类模板，用于在内存中操作字符串流。它提供了一种方便的方式来将数据转换为字符串（或从字符串中提取数据），类似于使用输入/输出流（如 cin 和 cout）但操作的是字符串。
+
+主要特点：
+构造与使用：
+你可以像使用其它流对象一样使用 stringstream。
+
+通过 std::stringstream ss; 创建一个空字符串流。
+使用 << 运算符向流中写入数据。
+使用 .str() 方法获取最终的字符串。
+数据拼接：
+可以将各种类型的数据（例如整数、浮点数、字符串等）写入流中，然后统一转换为一个字符串。这种方式比通过字符串拼接更安全、更高效。
+
+#include <sstream>
+#include <string>
+#include <iostream>
+
+int main() {
+    int a = 10;
+    double b = 3.14;
+    std::string s = "Hello";
+
+    // 创建一个 stringstream 对象
+    std::stringstream ss;
+    // 将各种数据写入流中
+    ss << s << ", the value of a is " << a << " and b is " << b << ".";
+
+    // 获取最终拼接好的字符串
+    std::string result = ss.str();
+    std::cout << result << std::endl;
+
+    return 0;
+}
+Hello, the value of a is 10 and b is 3.14.
+
+
+============================================================================================================================================================
+
+snprintf 会根据你提供的缓冲区大小，确保输出的字符串以空字符 '\0' 结尾，只要缓冲区大小大于 0。
+
+详细说明
+终止符写入：
+当你调用 snprintf(buf, sizeof(buf), format, ...) 时，如果 sizeof(buf) 大于 0，snprintf 会在格式化输出的字符串末尾写入一个 '\0'，以确保字符串正确终止。
+
+截断情况：
+如果输出的内容长度超过了缓冲区的大小（包括终止符），snprintf 会截断输出，并保证最后一个字符是 '\0'，从而防止缓冲区溢出。
+
+返回值：
+返回值不包括终止符的长度，表示如果有足够空间的话，最终应该输出多少字符（不包括终止符）。如果返回值大于等于缓冲区大小，则说明输出被截断了。
+
+注意事项
+当缓冲区大小为 0 时，snprintf 不会写入任何字符，也不会写入终止符，但仍会返回如果有足够空间所需的字符数。
+综上，snprintf 会在大多数情况下保证字符串以 '\0' 结尾，从而使其成为一个合法的 C 字符串。
+
+============================================================反序列化的步骤===================================================================================
+
+1. 提前创建好engine
+2. load_file(engine),将engine中的数据加载出来，其是一个uint8_t类型的指针pdata
+3. engine_ = runtime_->deserializeCudaEngine(pdata, size, nullptr) 从pdata中反序列化，engine_再创建执行上下文
+
+===========================================================================================================================================================
+
+在 C++ 中，std::vector 的 data() 方法返回指向底层连续内存数组的指针，也就是存储该向量元素的数组首元素的指针。
+
+例如，对于一个类型为 std::vector<int> 的向量，调用 data() 返回的就是一个 int* 指针，指向向量中第一个元素。如果向量是常量（例如 const std::vector<int>），则返回 const int*。
+
+这种返回方式允许你直接访问向量内存，可以与 C 风格数组或需要连续内存的库接口进行交互。
+
+例如， const std::vector<void *> &bindings，调用data() 返回的是一个 void** 指针
+
+============================================================================================================================================================
+
+std::accumulate 是 C++ 标准库中的一个函数模板，定义在 <numeric> 头文件中，用于对指定区间内的元素进行累加或累积操作。它的主要作用是将一个范围内的所有元素“累加”成一个单一的值，但同时也可以通过自定义操作来实现其他累积计算，比如乘法。
+
+基本用法
+最常见的函数模板签名如下：
+
+cpp
+复制代码
+template<class InputIt, class T>
+T accumulate(InputIt first, InputIt last, T init);
+参数说明：
+first 和 last：表示要处理的区间的起始和结束迭代器。
+init：累加的初始值，其类型也决定了返回值的类型。
+默认情况下，std::accumulate 使用加法操作符（+）来对每个元素进行累加。例如：
+
+cpp
+复制代码
+#include <iostream>
+#include <numeric>
+#include <vector>
+
+int main() {
+    std::vector<int> nums {1, 2, 3, 4, 5};
+    int sum = std::accumulate(nums.begin(), nums.end(), 0);
+    std::cout << "Sum: " << sum << std::endl;  // 输出：Sum: 15
+    return 0;
+}
+自定义二元操作
+除了默认的加法操作外，你还可以传入一个自定义的二元函数来进行其他类型的累积操作，比如计算所有元素的乘积。其函数模板签名为：
+
+cpp
+复制代码
+template<class InputIt, class T, class BinaryOperation>
+T accumulate(InputIt first, InputIt last, T init, BinaryOperation op);
+例如，下面的代码使用 std::multiplies 来计算所有元素的乘积：
+
+cpp
+复制代码
+#include <iostream>
+#include <numeric>
+#include <vector>
+#include <functional>
+
+int main() {
+    std::vector<int> nums {1, 2, 3, 4, 5};
+    int product = std::accumulate(nums.begin(), nums.end(), 1, std::multiplies<int>());
+    std::cout << "Product: " << product << std::endl;  // 输出：Product: 120
+    return 0;
+}
+总结
+头文件： 使用 std::accumulate 前需要包含 <numeric>。
+初始值： 参数 init 的类型决定了累积结果的类型，因此选择合适的初始值非常重要。
+灵活性： 除了默认的加法操作，你还可以传入自定义的二元操作函数来实现其他累积逻辑。
+通过以上方式，std::accumulate 能够高效且灵活地处理数组或容器内数据的累积计算。
+===============================================================================================================================================
+
+

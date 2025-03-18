@@ -49,6 +49,7 @@ link_librarys     := $(link_opencv) $(link_trt) $(link_cuda) $(link_sys)
 empty := 
 library_path_export := $(subst $(empty) $(empty),:,$(library_paths))
 
+
 run_paths     := $(foreach item,$(library_paths),-Wl,-rpath=$(item))
 include_paths := $(foreach item,$(include_paths),-I$(item))
 library_paths := $(foreach item,$(library_paths),-L$(item))
@@ -56,7 +57,7 @@ link_librarys := $(foreach item,$(link_librarys),-l$(item))
 
 cpp_compile_flags := -std=$(stdcpp) -w -g -O0 -m64 -fPIC -fopenmp -pthread $(include_paths)
 cu_compile_flags  := -Xcompiler "$(cpp_compile_flags)"
-link_flags        := -pthread -fopenmp -Wl,-rpath='$$ORIGIN' $(library_paths) $(link_librarys)
+link_flags        := -pthread -fopenmp -Wl,-rpath='$$ORIGIN' $(library_paths) $(link_librarys) $(run_paths)
 
 cpp_srcs := $(shell find $(srcdir) -name "*.cpp")
 cpp_objs := $(cpp_srcs:.cpp=.cpp.o)
@@ -89,8 +90,10 @@ endif
 
 
 $(name)   : $(workdir)/$(name)
+	@echo "=================================make first target===================================="
 
 all       : $(name)
+	@echo "=================================make all===================================="
 
 run       : $(name)
 	@cd $(workdir) && python test.py
