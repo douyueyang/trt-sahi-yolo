@@ -1,0 +1,56 @@
+[
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/bin/g++ -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -std=c++17 -w -g -O0 -m64 -fPIC -fopenmp -pthread -g -std=gnu++17 -o CMakeFiles/pro.dir/src/common/image.cpp.o -c /home/user/Code/trt-sahi-yolo/src/common/image.cpp",
+  "file": "/home/user/Code/trt-sahi-yolo/src/common/image.cpp",
+  "output": "CMakeFiles/pro.dir/src/common/image.cpp.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/bin/g++ -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -std=c++17 -w -g -O0 -m64 -fPIC -fopenmp -pthread -g -std=gnu++17 -o CMakeFiles/pro.dir/src/common/tensorrt8.cpp.o -c /home/user/Code/trt-sahi-yolo/src/common/tensorrt8.cpp",
+  "file": "/home/user/Code/trt-sahi-yolo/src/common/tensorrt8.cpp",
+  "output": "CMakeFiles/pro.dir/src/common/tensorrt8.cpp.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/bin/g++ -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -std=c++17 -w -g -O0 -m64 -fPIC -fopenmp -pthread -g -std=gnu++17 -o CMakeFiles/pro.dir/src/main.cpp.o -c /home/user/Code/trt-sahi-yolo/src/main.cpp",
+  "file": "/home/user/Code/trt-sahi-yolo/src/main.cpp",
+  "output": "CMakeFiles/pro.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/bin/g++ -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -std=c++17 -w -g -O0 -m64 -fPIC -fopenmp -pthread -g -std=gnu++17 -o CMakeFiles/pro.dir/src/speed.cpp.o -c /home/user/Code/trt-sahi-yolo/src/speed.cpp",
+  "file": "/home/user/Code/trt-sahi-yolo/src/speed.cpp",
+  "output": "CMakeFiles/pro.dir/src/speed.cpp.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/bin/g++ -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -std=c++17 -w -g -O0 -m64 -fPIC -fopenmp -pthread -g -std=gnu++17 -o CMakeFiles/pro.dir/src/test_yolo.cpp.o -c /home/user/Code/trt-sahi-yolo/src/test_yolo.cpp",
+  "file": "/home/user/Code/trt-sahi-yolo/src/test_yolo.cpp",
+  "output": "CMakeFiles/pro.dir/src/test_yolo.cpp.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -g -std=c++17 \"--generate-code=arch=compute_89,code=[compute_89,sm_89]\" -x cu -c /home/user/Code/trt-sahi-yolo/src/common/memory.cu -o CMakeFiles/pro.dir/src/common/memory.cu.o",
+  "file": "/home/user/Code/trt-sahi-yolo/src/common/memory.cu",
+  "output": "CMakeFiles/pro.dir/src/common/memory.cu.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -g -std=c++17 \"--generate-code=arch=compute_89,code=[compute_89,sm_89]\" -x cu -c /home/user/Code/trt-sahi-yolo/src/model/affine.cu -o CMakeFiles/pro.dir/src/model/affine.cu.o",
+  "file": "/home/user/Code/trt-sahi-yolo/src/model/affine.cu",
+  "output": "CMakeFiles/pro.dir/src/model/affine.cu.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -g -std=c++17 \"--generate-code=arch=compute_89,code=[compute_89,sm_89]\" -x cu -c /home/user/Code/trt-sahi-yolo/src/model/yolo.cu -o CMakeFiles/pro.dir/src/model/yolo.cu.o",
+  "file": "/home/user/Code/trt-sahi-yolo/src/model/yolo.cu",
+  "output": "CMakeFiles/pro.dir/src/model/yolo.cu.o"
+},
+{
+  "directory": "/home/user/Code/trt-sahi-yolo/build",
+  "command": "/usr/local/cuda/bin/nvcc -forward-unknown-to-host-compiler -I/home/user/Code/trt-sahi-yolo/src -I/usr/local/cuda-11.8/include -I/home/user/thirdparty/opencv4.8.1/include/opencv4 -I/home/user/thirdparty/TensorRT-8.6.1.6/include -I/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include -g -std=c++17 \"--generate-code=arch=compute_89,code=[compute_89,sm_89]\" -x cu -c /home/user/Code/trt-sahi-yolo/src/slice/slice.cu -o CMakeFiles/pro.dir/src/slice/slice.cu.o",
+  "file": "/home/user/Code/trt-sahi-yolo/src/slice/slice.cu",
+  "output": "CMakeFiles/pro.dir/src/slice/slice.cu.o"
+}
+]

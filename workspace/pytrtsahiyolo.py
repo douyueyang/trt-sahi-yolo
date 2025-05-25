@@ -2,7 +2,7 @@ import trtsahiyolo
 from trtsahiyolo import YoloType as YoloType
 import cv2
 
-cap = cv2.VideoCapture("video.mp4")
+cap = cv2.VideoCapture(r"/home/douyueyang/Code/videos/ball.mp4")
 
 instance = trtsahiyolo.TrtSahiYolo("yolov8n.engine", YoloType.YOLOV8, 0, 0.5, 0.5)
 

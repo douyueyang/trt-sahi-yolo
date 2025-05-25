@@ -5,37 +5,35 @@ srcdir    := src
 objdir    := objs
 stdcpp    := c++17
 cuda_home := /usr/local/cuda-11.8
-cuda_arch := 8.6
+cuda_arch := -gencode=arch=compute_89,code=sm_89
 nvcc      := $(cuda_home)/bin/nvcc -ccbin=$(cc)
 
 
 project_include_path := src
-opencv_include_path  := /home/user/thirdparty/opencv4.8.1/include/opencv4
-trt_include_path     := /home/user/thirdparty/TensorRT-8.6.1.6/include
+opencv_include_path  := /home/douyueyang/thirdparty/opencv4.8.1/include/opencv4
+trt_include_path     := /home/douyueyang/thirdparty/TensorRT-8.6.1.6/include
 cuda_include_path    := $(cuda_home)/include
 ffmpeg_include_path  := 
 
-python_include_path  := /home/user/miniconda3/envs/yolo/include/python3.10
-
+python_include_path  := /workspace/miniconda3/envs/health/include/python3.10
 
 include_paths        := $(project_include_path) \
 						$(opencv_include_path) \
 						$(trt_include_path) \
 						$(cuda_include_path) \
 						$(python_include_path) \
-						/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include
+						/home/douyueyang/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/include
 
 
-opencv_library_path  := /home/user/thirdparty/opencv4.8.1/lib
-trt_library_path     := /home/user/thirdparty/TensorRT-8.6.1.6/lib
+opencv_library_path  := /home/douyueyang/thirdparty/opencv4.8.1/lib
+trt_library_path     := /home/douyueyang/thirdparty/TensorRT-8.6.1.6/lib
 cuda_library_path    := $(cuda_home)/lib64/
 python_library_path  := 
 
 library_paths        := $(opencv_library_path) \
 						$(trt_library_path) \
 						$(cuda_library_path) \
-						$(cuda_library_path) \
-						/home/user/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/lib \
+						/home/douyueyang/thirdparty/cudnn-linux-x86_64-8.9.7.29_cuda11-archive/lib \
 						$(python_library_path)
 
 link_opencv       := opencv_core opencv_imgproc opencv_videoio opencv_imgcodecs
@@ -56,8 +54,8 @@ library_paths := $(foreach item,$(library_paths),-L$(item))
 link_librarys := $(foreach item,$(link_librarys),-l$(item))
 
 cpp_compile_flags := -std=$(stdcpp) -w -g -O0 -m64 -fPIC -fopenmp -pthread $(include_paths)
-cu_compile_flags  := -Xcompiler "$(cpp_compile_flags)"
-link_flags        := -pthread -fopenmp -Wl,-rpath='$$ORIGIN' $(library_paths) $(link_librarys) $(run_paths)
+cu_compile_flags  := -Xcompiler "$(cpp_compile_flags)" $(cuda_arch)
+link_flags        := -pthread -fopenmp -Wl,-rpath='$$ORIGIN' $(library_paths) $(link_librarys) $(run_paths) 
 
 cpp_srcs := $(shell find $(srcdir) -name "*.cpp")
 cpp_objs := $(cpp_srcs:.cpp=.cpp.o)
@@ -69,6 +67,7 @@ cu_objs := $(cu_srcs:.cu=.cu.o)
 cu_objs := $(cu_objs:$(srcdir)/%=$(objdir)/%)
 cu_mk   := $(cu_objs:.cu.o=.cu.mk)
 
+mks     := $(cpp_mk) $(cu_mk)
 TRT_VERSION := 8
 
 # 根据 TRT_VERSION 设置不同的编译选项

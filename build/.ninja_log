@@ -1,0 +1,14 @@
+# ninja log v5
+1	1107	1743673798514894480	CMakeFiles/pro.dir/src/common/image.cpp.o	b7e04ee0f370b7d9
+2	843	1743673798248902035	CMakeFiles/pro.dir/src/common/memory.cu.o	4e016b08d643a4a0
+3903	3999	1743673801405812106	/home/user/Code/trt-sahi-yolo/workspace/pro	5a971e63a675c7f8
+1	584	1743673797991909334	CMakeFiles/pro.dir/src/common/tensorrt8.cpp.o	a3525e27c5f3b1aa
+0	3	0	clean	a31eedcededa8236
+3999	4195	0	/home/user/Code/trt-sahi-yolo/build/CMakeFiles/run	7e382c45fae0cd24
+2	3903	1743673801308814879	CMakeFiles/pro.dir/src/model/yolo.cu.o	a7327ceec3a39b45
+2	1287	1743673798694889367	CMakeFiles/pro.dir/src/speed.cpp.o	7c9bf2ef00e86f69
+3999	4195	0	CMakeFiles/run	7e382c45fae0cd24
+2	898	1743673798304900445	CMakeFiles/pro.dir/src/model/affine.cu.o	9857b3607ab83a0d
+2	3618	1743673801015823256	CMakeFiles/pro.dir/src/slice/slice.cu.o	42d99973478c634a
+2	1624	1743673799031879794	CMakeFiles/pro.dir/src/test_yolo.cpp.o	c0c2ae488238164
+2	147	1743673797555921691	CMakeFiles/pro.dir/src/main.cpp.o	e507df5c0dd59b0b

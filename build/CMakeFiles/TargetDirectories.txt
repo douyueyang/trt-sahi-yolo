@@ -1,0 +1,4 @@
+/home/user/Code/trt-sahi-yolo/build/CMakeFiles/pro.dir
+/home/user/Code/trt-sahi-yolo/build/CMakeFiles/run.dir
+/home/user/Code/trt-sahi-yolo/build/CMakeFiles/edit_cache.dir
+/home/user/Code/trt-sahi-yolo/build/CMakeFiles/rebuild_cache.dir

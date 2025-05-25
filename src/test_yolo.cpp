@@ -83,7 +83,7 @@ static const char *cocolabels[] = {"person", "bicycle", "car",
 
 void v11SlicedInfer()
 {
-    cv::Mat image = cv::imread("inference/persons.jpg");
+    cv::Mat image = cv::imread("inference/frame_293.jpg");
     auto yolo = yolo::load("yolov8n.engine", yolo::YoloType::YOLOV8, 0, 0.5, 0.5);
     if (yolo == nullptr)
         return;

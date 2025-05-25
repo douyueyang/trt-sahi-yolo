@@ -129,7 +129,7 @@ public:
         bottom = std::min(canvasHeight, bottom);
         std::tuple<T, T, T, T> all = std::make_tuple(0, 0, canvasWidth, canvasHeight);
 
-        // 一个框有6个可以画框的区域，判断那些区域没超过画面
+        // 一个框周围有6个可以画框的区域，判断那些区域没超过画面
         std::vector<std::tuple<T, T, T, T>> positions =
         {
             std::make_tuple(left, top - textHeight - baseline, left + textWidth, top),
@@ -145,7 +145,7 @@ public:
         };
 
         for (const auto& position : positions)
-        {
+        {   
             if (computeOverlap(all, position) == 1.0f)
             {
                 candidatePositions.push_back(position);

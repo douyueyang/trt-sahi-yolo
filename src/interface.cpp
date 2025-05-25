@@ -21,8 +21,10 @@ public:
     PYBIND11_TYPE_CASTER(cv::Mat, _("numpy.ndarray"));
 
     //! 1. cast numpy.ndarray to cv::Mat
+    // handle 是一个指向 Python 对象的轻量级包装器，这里是numpy.ndarray
     bool load(handle obj, bool)
     {
+        // 将 handle 转换为 Pybind11 的 py::array 类型，表示 NumPy 数组。
         array b = reinterpret_borrow<array>(obj);
         buffer_info info = b.request();
 
